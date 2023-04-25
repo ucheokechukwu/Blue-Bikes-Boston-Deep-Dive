@@ -24,7 +24,7 @@ The Citybikes, Yelp and FourSquares Developer websites have detailed documentati
 - [Four Squares Category Listing](https://location.foursquare.com/places/docs/categories)
 The data was retrieved as .json() files and relevant dictionary values were parsed into Pandas DataFrames. I collected: `Name`, `ID` (for Yelp and FourSquares), `Categories`, `Review Count` and `Ratings`. The latter two were only provided by Yelp. I later realized the `Categories` field was not relevant in this project. However, my steps in processing the category list can be seen in the relevant Notebook.
 
-### 2. Data Cleaning:
+### 3. Data Cleaning:
 #### 1. Handling duplications
 By doing a rough inspection of the data, I discovered that the `pd.unique()` was an insufficient identifier for unique values of the business names. There were several similar names which were used inter-changeably but stored as separate records with their own unique IDs. Using a combination of Regular Expressions and Python string methods, I identified and deleted some of the duplicated data. A more thorough investigation would still be recommended. 
 I also decided to replace the unique IDs that came with the JSON file with my own indexing as they were not strictly unique. 
@@ -32,21 +32,20 @@ I also decided to replace the unique IDs that came with the JSON file with my ow
 #### 2. Handling Null Data
 I used different strategies to handle missing and NaN data. Due to the observed wide range of values in the data, Mean was not appopriate as a measure of central tendency. Where a central value was appropriate, I used median scores. I also used minimum in the fields for `Review Count`. 
 
-#### 3. Joining the Data
+#### 4. Joining the Data
 
 After confirming that the information I compiled was unique and distinct, I proceeded to join the data.   I had previously merged the API data into 2 tables – `restaurants` and `rentals`. I then joined those 2 tables using `pd.concat` into  a large table `places_of_Interest`. I joined `places_of_Interest` and `stations` with pd.merge. I used the Bike Station ID as the key (primary for the stations dataframe, and foreign for the Restaurants and Car dataframe), as the join point.
 This created a large table that I used `groupby` to calculate values like average reviews and ratings across the 
 
-#### 4. Creating the Database
+#### 5. Creating the Database
 The database was SQLite3 which is an on-device database server (not cloud based). I used the Python libraries for interfacing the SQLite server of `sqlite3` and `sqlalchemy`. I created 3 tables: `stations`, `places`, `stations_and_places`. `stations_and_places` is a cross-indexing table that interfaces the `stations` and `places`. Therefore leaving the other 2 tables with only unique information about their locations (ID, Name, Latitude and Longitude). I used SQLite for creating the tables and SQLAlchemy for updating and retrieving records, because it seemed more user-friendly although that is a matter of opinion.
 
-#### 5. Data Modelling:
+#### 6. Modelling:
 The purpose of process was to build a model that could be used to predict the Number of Bikes based on the information of the places of interest i.e. their numbers within the station’s vicinity, and their average ratings. 
 - **Step One**: I pared the data down to what was relevant: the Numbers of Bikes, the Numbers of Restaurants, the Number of Rentals, Restaurant Rating, Rental Ratings. `Bikes` is the Target/Dependent Variable and the other 4 are the Independent variables. I also renamed their columns for simplicity.
 - **Step Two**:	I explored the data by boxchart and other seamap diagrams. I further cleaned the data by removing extreme outliers. I noticed some relationships via the scatter pots and correlation matrixes and I formed some theories which I would confirm via the Linear Regression analysis.
-![prior_to_cleaning](images/pre-cleaning-boxplot-1.png)
-![prior_to_cleaning](images/pre-cleaning-boxplot-2.png)
-![after_cleaning](images/post-cleaning-boxplot.png)
+![prior_to_cleaning](images/pre-cleaning-corr.png))
+![after_cleaning](images/post-cleaning-corr.png)
 - **Step Three**: I used the `statsmodel` libraries to create a Linear Regression model. I used the *Forward Selection* strategy. I ran the analysis in an iterative process, first by modelling all 4 indepedent variables as single-variable models, then selecting the variable whose model gave the best performance. Then by running 3 2-variable model with the previously selected variable as a constant variable in the 3 pairs, and so on until the model's performance stopped improving. 
 
 

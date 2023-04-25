@@ -76,17 +76,17 @@ In general, the project was a steep learning curve for a student new to API data
 
 ### Stategy to make a classification model
 
-    1. **Categorize** the output/dependent variable. The 'Bikes' will be categorized into 3 values. Taking into account its max/min values and with the awareness that its distribution is skewed to the right, the following cateogories are proposed, based on the models above:
+1. **Categorize** the output/dependent variable. The 'Bikes' will be categorized into 3 values. Taking into account its max/min values and with the awareness that its distribution is skewed to the right, the following cateogories are proposed, based on the models above:
 
-    - Class A size: >30
-    - Class B size: 20-30
-    - Class C size: 14-20
-    - Class D size: <14
+- Class A size: >30
+- Class B size: 20-30
+- Class C size: 14-20
+- Class D size: <14
+
+2. The original (pre-cleaning) dataframe will be **updated** accordingly using a simple sorting formula, and the `Bikes` column dtype changed to `category`.
     
-    2. The original (pre-cleaning) dataframe will be **updated** accordingly using a simple sorting formula, and the `Bikes` column dtype changed to `category`.
-        
-    3. **Cleaning, visualization and analysis** of the new dataframe. The use of `seaborn`'s rich library of categorical graphics to analyze the new relationships between the variables.
+3. **Cleaning, visualization and analysis** of the new dataframe. The use of `seaborn`'s rich library of categorical graphics to analyze the new relationships between the variables.
 
-    4. Use `statsmodel` `logit` (or any other appropriate model's logistic regression tool) to **fit the model**. Use Backward Selection as the model optimization strategy.
+4. Use `statsmodel` `logit` (or any other appropriate model's logistic regression tool) to **fit the model**. Use Backward Selection as the model optimization strategy.
 
-    5. **Analyze** the results, visualize them and make improvements and/or recommendations.
+5. **Analyze** the results, visualize them and make improvements and/or recommendations.

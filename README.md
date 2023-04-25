@@ -52,6 +52,8 @@ The purpose of process was to build a model that could be used to predict the Nu
 - **Step Two**:	I explored the data by boxchart and other seamap diagrams. I further cleaned the data by removing extreme outliers. I noticed some relationships via the scatter pots and correlation matrixes and I formed some theories which I would confirm via the Linear Regression analysis.
 ![prior_to_cleaning](images/pre-cleaning-corr.png)
 *Correlation before removing outliers*
+
+
 ![after_cleaning](images/post-cleaning-corr.png)
 *Correlation after removing outliers. Note the marginal improvement of Bike correlation scores.*
 - **Step Three**: I used the `statsmodel` libraries to create a Linear Regression model. I used the *Forward Selection* strategy. I ran the analysis in an iterative process, first by modelling all 4 indepedent variables as single-variable models, then selecting the variable whose model gave the best performance. Then by running 3 2-variable model with the previously selected variable as a constant variable in the 3 pairs, and so on until the model's performance stopped improving. 

@@ -43,6 +43,7 @@ Prior to modelling, I ran some visualization functions to see how the data looke
 
 ### 5. Creating the Database
 The database was SQLite3 which is an on-device database server (not cloud based). I used the Python libraries for interfacing the SQLite server of `sqlite3` and `sqlalchemy`. I created 3 tables: `stations`, `places`, `stations_and_places`. `stations_and_places` is a cross-indexing table that interfaces the `stations` and `places`. Therefore leaving the other 2 tables with only unique information about their locations (ID, Name, Latitude and Longitude). I used SQLite for creating the tables and SQLAlchemy for updating and retrieving records, because it seemed more user-friendly although that is a matter of opinion.
+![Database](images/screenshot_tableau_citybikesdb.png)
 
 ### 6. Modelling:
 The purpose of process was to build a model that could be used to predict the Number of Bikes based on the information of the places of interest i.e. their numbers within the station’s vicinity, and their average ratings. 

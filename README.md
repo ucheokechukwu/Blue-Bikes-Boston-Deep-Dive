@@ -39,7 +39,7 @@ This created a large table that I used `groupby` to calculate values like averag
 
 #### Visualization
 Prior to modelling, I ran some visualization functions to see how the data looked like: to identify potential outliers, to understand the distrubution of data, etc.
-[Histogram](images/variable_distributions.png)
+![Histogram](images/variable_distributions.png)
 
 ### 5. Creating the Database
 The database was SQLite3 which is an on-device database server (not cloud based). I used the Python libraries for interfacing the SQLite server of `sqlite3` and `sqlalchemy`. I created 3 tables: `stations`, `places`, `stations_and_places`. `stations_and_places` is a cross-indexing table that interfaces the `stations` and `places`. Therefore leaving the other 2 tables with only unique information about their locations (ID, Name, Latitude and Longitude). I used SQLite for creating the tables and SQLAlchemy for updating and retrieving records, because it seemed more user-friendly although that is a matter of opinion.

@@ -1,7 +1,14 @@
 # Final-Project-Statistical-Modelling-with-Python
 
 ## Project/Goals
-The objective of this project was to analyze the places of interest in the vicinity of bike stations in certain locations. 
+The objective of this project was to analyze the places of interest in the vicinity of bike stations in certain locations. But more significantly, it was to practice the skills gained during the first 3 weeks of bootcamp. I gained experience in the following:
+
+1. Accessing data using APIs
+2. Cleaning and transforming data using Python
+3. Loading data into a database using Python
+4. Performing EDA, including using both statistics and visualizations
+5. Identifying trends and patterns in data using statistical models
+6. Interpreting the results of the statistical models
 
 ## Process
 ### Selecting a City and an Alternative Place of Interest:
@@ -14,7 +21,7 @@ The objective of this project was to analyze the places of interest in the vicin
 The Citybikes, Yelp and FourSquares Developer websites have detailed documentation and instructions on how to use their API to retrieve location data. Of particular interest is the documentation on their category listings, and how to query more specific information.
 
 - [Yelp Category Listing](https://docs.developer.yelp.com/docs/resources-categories)
-- [Four Squares Category Listing] (https://location.foursquare.com/places/docs/categories)
+- [Four Squares Category Listing](https://location.foursquare.com/places/docs/categories)
 The data was retrieved as .json() files and relevant dictionary values were parsed into Pandas DataFrames. I collected: `Name`, `ID` (for Yelp and FourSquares), `Categories`, `Review Count` and `Ratings`. The latter two were only provided by Yelp. I later realized the `Categories` field was not relevant in this project. However, my steps in processing the category list can be seen in the relevant Notebook.
 
 ### 2. Data Cleaning:
@@ -37,6 +44,9 @@ The database was SQLite3 which is an on-device database server (not cloud based)
 The purpose of process was to build a model that could be used to predict the Number of Bikes based on the information of the places of interest i.e. their numbers within the station’s vicinity, and their average ratings. 
 - **Step One**: I pared the data down to what was relevant: the Numbers of Bikes, the Numbers of Restaurants, the Number of Rentals, Restaurant Rating, Rental Ratings. `Bikes` is the Target/Dependent Variable and the other 4 are the Independent variables. I also renamed their columns for simplicity.
 - **Step Two**:	I explored the data by boxchart and other seamap diagrams. I further cleaned the data by removing extreme outliers. I noticed some relationships via the scatter pots and correlation matrixes and I formed some theories which I would confirm via the Linear Regression analysis.
+![prior_to_cleaning](images/pre-cleaning-boxplot-1.png)
+![prior_to_cleaning](images/pre-cleaning-boxplot-2.png)
+![after_cleaning](images/post-cleaning-boxplot.png)
 - **Step Three**: I used the `statsmodel` libraries to create a Linear Regression model. I used the *Forward Selection* strategy. I ran the analysis in an iterative process, first by modelling all 4 indepedent variables as single-variable models, then selecting the variable whose model gave the best performance. Then by running 3 2-variable model with the previously selected variable as a constant variable in the 3 pairs, and so on until the model's performance stopped improving. 
 
 

@@ -12,7 +12,7 @@ The objective of this project was to analyze the places of interest in the vicin
 
 ## Process
 ### 1. Selecting a City and an Alternative Place of Interest:
-**City**: Boston, Massachussetts. The results of querying the Citybikes Developer API was a single bike station company - . [Blue Bikes](https://www.bluebikes.com/) Blue Bikes is a state-sponsored public bike transportation network with over 4,000 bikes and 400 stations servicing metro Boston.
+**City**: Boston, Massachussetts. The results of querying the Citybikes Developer API was a single bike station company - [Blue Bikes](https://www.bluebikes.com/). Blue Bikes is a state-sponsored public bike transportation network with over 4,000 bikes and 400 stations servicing metro Boston.
 
 **Place of Interest**: In addition to the instructions to collect data on Restaurants, I also collected data on 'Car Rentals'. I thought it would be interesting to observe the influence, if any, that the car rental business has on the proliferation of biking stations. 
 
@@ -22,7 +22,8 @@ The Citybikes, Yelp and FourSquares Developer websites have detailed documentati
 
 - [Yelp Category Listing](https://docs.developer.yelp.com/docs/resources-categories)
 - [Four Squares Category Listing](https://location.foursquare.com/places/docs/categories)
-The data was retrieved as .json() files and relevant dictionary values were parsed into Pandas DataFrames. I collected: `Name`, `ID` (for Yelp and FourSquares), `Categories`, `Review Count` and `Ratings`. The latter two were only provided by Yelp. I later realized the `Categories` field was not relevant in this project. However, my steps in processing the category list can be seen in the relevant Notebook.
+
+The data was retrieved as `.json()` files and relevant dictionary values were parsed into Pandas DataFrames. I collected: `Name`, `ID` (for Yelp and FourSquares), `Categories`, `Review Count` and `Ratings`. The latter two were only provided by Yelp. I later realized the `Categories` field was not relevant in this project. However, my steps in processing the category list can be seen in the relevant Notebook.
 
 ### 3. Data Cleaning and Inspection:
 #### 1. Handling duplications
@@ -43,7 +44,7 @@ Prior to modelling, I ran some visualization functions to see how the data looke
 
 ### 5. Creating the Database
 The database was SQLite3 which is an on-device database server (not cloud based). I used the Python libraries for interfacing the SQLite server of `sqlite3` and `sqlalchemy`. I created 3 tables: `stations`, `places`, `stations_and_places`. `stations_and_places` is a cross-indexing table that interfaces the `stations` and `places`. Therefore leaving the other 2 tables with only unique information about their locations (ID, Name, Latitude and Longitude). I used SQLite for creating the tables and SQLAlchemy for updating and retrieving records, because it seemed more user-friendly although that is a matter of opinion.
-![Database](images/screenshot_tableau_citybikesdb.png)
+![Database](images/screenshot_tableau_citybikesdb.jpg)
 
 ### 6. Modelling:
 The purpose of process was to build a model that could be used to predict the Number of Bikes based on the information of the places of interest i.e. their numbers within the station’s vicinity, and their average ratings. 
@@ -56,13 +57,13 @@ The purpose of process was to build a model that could be used to predict the Nu
 
 ## Results
 ### Evaluation of API Performance:
-Yelp provided information about the reviews and rating of each of the businesses. FourSquares provided information about the opening hours of the businesses (not collected, but observed in the .json() file) and the associated brands of the business. I would rank them about the same in terms of Quality of information.  FourSquares provided more data in general but a lot of that was non-unique records which required a lot of data cleaning. I go into details of that in 'Data Joining.' In summary: Yelp provided more quality data.
+Yelp provided information about the reviews and rating of each of the businesses. FourSquares provided information about the opening hours of the businesses (not collected, but observed in the .json() file) and the associated brands of the business. FourSquares provided more data in general but a lot of that was non-unique records which required a lot of data cleaning. I go into details of that in the 'Data Joining' notebook. FourSquares has better categorization structure. In general, I think Yelp provided better data for this specific project. 
 
 ### Evaluation of Modelling:
 
 ![results](images/model_regression_result.png)
 
-The results of the model were generally poor with a R^2 value of 0.103 at best. Further data cleaning might improve the results, but it's possible that those data points will be incorrectly identified as outliers and removing them will alter the distribution too severely for proper modelling. More attempts at different models and more data will be required before making that decision.
+The results of the model were generally poor with a R<sup>2</sup> value of 0.103 at best. Further data cleaning might improve the results, but it's possible that those data points will be incorrectly identified as outliers and removing them will alter the distribution too severely for proper modelling. More attempts at different models and more data will be required before making that decision.
 
 
 ## Challenges 

@@ -2,7 +2,7 @@
 
 
 ## Project/Goals
-The objective of this project was to analyze the places of interest in the vicinity of bike stations in certain locations. But more significantly, it was to practice the skills gained during the first 3 weeks of bootcamp. I gained experience in the following:
+The objective of this project was to analyze the places of interest in the vicinity of bike stations in certain locations. But more significantly, it was to practice the skills gained during the first 3 weeks of Data Science bootcamp. I gained experience in the following:
 
 1. Accessing data using APIs
 2. Cleaning and transforming data using Python
